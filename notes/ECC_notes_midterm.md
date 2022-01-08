@@ -174,3 +174,74 @@ $K_5=\{5, 10, 20, 17, 11, 22, 21, 19, 15, 7, 14\}$ (從下一個沒有的根開�
 \end{bmatrix}\begin{bmatrix}A_0\\A_1\\\vdots{}\\A_{n-1}\end{bmatrix}$ (DFT)
 * **[Thm 6.4]** $E_i=F_iG_i$ then $e_j=\frac{1}{n}\sum_{l=0}^{n-1}f_{((j-l))}g_l$
 * **[Thm 6.5]** Def 6.4 and 6.6 are equivalent.
+* **[Def 6.4 (Reed-Solomon Code)]** A nonbinray BCH code with $n=q-1$ and $n-k=2t$ and $d_{min}=2t+1$ (Let $\alpha$ be primitive element of $GF(q=p^s)$, $g(X)=(X-\alpha^l)...(X-\alpha^{l+2t-1})$)
+* **[Def 6.6 (RS code alternative definition)]**
+1. $\begin{bmatrix}a_0\\a_1\\\vdots{}\\ a_{n-1}\end{bmatrix}=\begin{bmatrix}
+1 & 1 & \dots{} & 1\\
+1 & \alpha & \dots{} & \alpha^{n-1}\\
+\vdots{} & \vdots{} & \ddots{} & \vdots{} \\
+1 & \alpha^{n-1} & \dots{} & (\alpha^{n-1})^{n-1}
+\end{bmatrix}\begin{bmatrix}A_0\\A_1\\\vdots{}\\A_{n-1}\end{bmatrix}$ (DFT)
+* **[Thm 6.4]** $E_i=F_iG_i$ then $e_j=\frac{1}{n}\sum_{l=0}^{n-1}f_{((j-l))}g_l$
+* **[Thm 6.5]** Def 6.4 and 6.6 are equivalent.
+* **[Extended RS Code]** Consider the $t$-error-correcting RS Code $C$ with parity matrix
+$H=\begin{bmatrix}
+1 & \alpha & \alpha^2 & \dots & \alpha^{n-1} \\  
+1 & \alpha^2 & \alpha^4 & \dots & \alpha^{2(n-1)} \\
+\vdots  & \vdots \\
+1 & \alpha^{2t} & \alpha^{4t} & \dots & \alpha^{2t(n-1)} \\  
+\end{bmatrix}$
+The extended code $C'$ with parity matrix 
+$H=\begin{bmatrix}
+1 & & 0 \\  
+0 & & 0 \\
+\vdots & H & \vdots \\
+0 & & 0\\  
+0 & & 1\\  
+\end{bmatrix}$
+has minimum distance $2t+1$. (Consider $\delta\leq{2t}$ columns of $H'$. they are all LI for four cases)
+* **[BCH Code Decoding]**
+Let $S=(S_1,\dots,S_{2t})$ where $S_i=r(\alpha^i)=e(\alpha^i)$.
+For nonbibary code, $e(X)=e_{i_1}X^{i_1}+\dots+e_{i_{\mu}}X^{i_{\mu}}$.
+Set $Y_l=e_{i_l}$, $X_l=\alpha^{i_l}$, then 
+$\begin{matrix}
+S_1= Y_1X_1+Y_2X_2+\dots+Y_{\mu}X_{\mu} \\
+S_2= Y_1X_1^2+Y_2X_2^2+\dots+Y_{\mu}X_{\mu}^2 \\
+\vdots  \\
+S_{2t}= Y_1X_1^{2t}+Y_2X_2^{2t}+\dots+Y_{\mu}X_{\mu}^{2t} \\
+\end{matrix}$
+* **[Error-locator Polynomial]**
+$\Lambda(x)=(1-xX_1)(1-xX_2)\dots(1-xX_{\nu})$
+$Y_lX_l^{j+\nu}\Lambda(X_l^{-1})=Y_l(X_l^{j+\nu}+\Lambda_1X_l^{j+\nu-1}+\dots+\Lambda_{\nu}X_l^{j})=0$
+$\sum_{l=1}^{\mu}Y_l(X_l^{j+\nu}+\Lambda_1X_l^{j+\nu-1}+\dots+\Lambda_{\nu}X_l^{j})=0$
+* **[Newton's Identity]**
+$S_{j+\nu}+\Lambda_1S_{j+\nu-1}+\Lambda_2S_{j+\nu-2}+\dots++\Lambda_{\nu}S_{j}=0$
+$\begin{bmatrix}
+S_1 & S_2 & \dots & S_{\nu}\\  
+S_2 & S_3 & \dots & S_{\nu+1}\\  
+&&\vdots \\
+S_{\nu} & S_{\nu+1} & \dots & S_{2\nu-1}\\  
+\end{bmatrix}\begin{bmatrix}
+\Lambda_{\nu} \\
+\Lambda_{\nu-1} \\
+\vdots  \\
+\Lambda_{1} \\
+\end{bmatrix}=\begin{bmatrix}
+-S_{\nu+1} \\
+-S_{\nu+2} \\
+\vdots  \\
+-S_{2\nu} \\
+\end{bmatrix}$
+* **[Thm 6.7]**
+The matrix 
+$M=\begin{bmatrix}
+S_1 & S_2 & \dots & S_{\mu}\\  
+S_2 & S_3 & \dots & S_{\mu+1}\\  
+\vdots & H & \vdots \\
+S_{\mu} & S_{\mu+1} & \dots & S_{2\mu-1}\\  
+\end{bmatrix}$
+is nonsingular if $\mu=\nu$ and is singular if $\mu>\nu$ ($M=ABA^T$)
+* **[Peterson-Gorenstein-Zierler Decoder]**
+* **[Berlekamp-Massey Algorithm]**
+* **[Thm 6.8]**
+* **[Forney Algorithm]**
